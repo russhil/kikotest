@@ -57,6 +57,7 @@ const WebinarRestaurant = React.lazy(() => import("../views/Webinar/componentRes
 const InstantLoan = React.lazy(() => import("../views/InstantLoan/component"));
 const InsuranceOffer = React.lazy(() => import("../views/InsuranceOffer/InsuranceOffer"));
 const InsurancePartner = React.lazy(() => import("../views/InsuranceOffer/insurancePartner"));
+const TestLandingPage = React.lazy(() => import("../views/TestLanding/TestLandingPage"));
 
 // Firebase messaging test function
 const fireBaseTest = async () => {
@@ -295,6 +296,7 @@ function App() {
               <Route path="/webinar-registration-restaurant4" element={<WebinarRestaurant isFromLead={false} isWebinarRS9={true} pixelId={`820276667513135`} />} />
               <Route path="/shopinsurancelead" element={<InsuranceOffer />} />
               <Route path="/insurancecandidate" element={<InsurancePartner />} />
+              <Route path="/testlanding" element={<TestLandingPage isFromLead={false} isWebinarRS9={true} pixelId={`326242339368504`} />} />
 
             </Routes>
           </React.Suspense>
