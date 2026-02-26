@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, {
+    lazy,
+    Suspense,
+    useCallback,
+    useEffect,
+    useMemo,
+    useRef,
+    useState,
+} from "react";
 import { ADD_WEBINAR_PARTICIPANT, FETCH_SETTINGS } from "../../api/apiList";
 import API from "../../api";
 import { handleError, notify } from "../../utils";
-import { get } from "lodash";
-import moment from "moment";
-import axios from "axios";
 import { Modal } from "reactstrap";
 
-import WebinarModal from "../Webinar/WebinarModal";
-import SuccessModal from "../Webinar/SuccessModel";
-import PreRazorpay from "../WebinarRazorPay/PreRazorpay";
 import FooterWebinar from "../Common/Footer/footerWebinar";
 
 import FirstSlide from "../../images/HomeNew/kirana_hero.webp";
@@ -32,6 +34,10 @@ import partIcon from "../Webinar/img/part-icon.svg";
 import YellowClockIcon from "../../images/HomeNew/yellow-clock-icon.svg";
 
 import "./testlanding.css";
+
+const WebinarModal = lazy(() => import("../Webinar/WebinarModal"));
+const SuccessModal = lazy(() => import("../Webinar/SuccessModel"));
+const PreRazorpay = lazy(() => import("../WebinarRazorPay/PreRazorpay"));
 
 /* ─── static data ─── */
 const articles = [
@@ -78,6 +84,31 @@ const videoUrls = [
     "https://kiko.live/wp-content/uploads/2024/03/video-2.mp4",
 ];
 
+const DEFAULT_WHATSAPP_URL = "https://chat.whatsapp.com/CSt5Uq9KBmj96FmaJYYYfk?mode=ems_copy_t";
+
+const getUTMParams = () => {
+    const params = new URLSearchParams(window.location.search);
+    return {
+        utm_source: params.get("utm_source") || "",
+        utm_medium: params.get("utm_medium") || "",
+        utm_campaign: params.get("utm_campaign") || "",
+        utm_term: params.get("utm_term") || "",
+        utm_content: params.get("utm_content") || "",
+    };
+};
+
+const formatWebinarDate = (value) => {
+    const parsedDate = value ? new Date(value) : new Date();
+    if (Number.isNaN(parsedDate.getTime())) {
+        return "";
+    }
+    return new Intl.DateTimeFormat("en-US", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+    }).format(parsedDate);
+};
+
 const PlayIcon = () => (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
         <path d="M8 5v14l11-7L8 5z" fill="#6c3ff5" />
@@ -113,82 +144,56 @@ function TestLandingPage(props) {
     });
 
     const [settingData, setSettingData] = useState({});
-    const [Utms, setUtms] = useState({});
+    const utms = useMemo(() => getUTMParams(), []);
+    const trackingLoadedRef = useRef(false);
 
-    /* ─── API & tracking (same as original) ─── */
+    /* ─── API & tracking ─── */
     const getSetting = async () => {
         const response = await API.get(FETCH_SETTINGS);
         if (response?.data?.success) {
-            setSettingData(response?.data?.result);
+            setSettingData(response?.data?.result || {});
         } else {
             notify("error", response?.data?.message);
         }
     };
 
-    function getUTMParams() {
-        const params = new URLSearchParams(window.location.search);
-        return {
-            utm_source: params.get("utm_source"),
-            utm_medium: params.get("utm_medium"),
-            utm_campaign: params.get("utm_campaign"),
-            utm_term: params.get("utm_term"),
-            utm_content: params.get("utm_content"),
-        };
-    }
-
-    const saveUtms = async (utms) => {
+    const saveUtms = useCallback(async () => {
         try {
-            await axios({
-                method: "post",
-                url: `${process.env.REACT_APP_ONDC_APP_KIKO_API_V2}/save-utms`,
-                headers: { desktop: true },
-                data: utms,
+            await fetch(`${process.env.REACT_APP_ONDC_APP_KIKO_API_V2}/save-utms`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    desktop: "true",
+                },
+                body: JSON.stringify(utms),
+                keepalive: true,
             });
-        } catch (error) { }
-    };
+        } catch (error) {
+            // no-op: analytics failures should not break the page
+        }
+    }, [utms]);
 
-    /* ─── Facebook Pixel ─── */
-    useEffect(() => {
-        if (!pixelId) return;
-        import("../Webinar/pixel").then((module) => {
-            module.initializeFacebookPixel(pixelId);
-        });
-    }, [pixelId]);
+    const initializeTracking = useCallback(async () => {
+        if (process.env.NODE_ENV === "development" || trackingLoadedRef.current) {
+            return;
+        }
+        trackingLoadedRef.current = true;
+        saveUtms();
 
-    /* ─── analytics init ─── */
-    useEffect(() => {
-        getSetting();
-        if (process.env.NODE_ENV !== "development") {
-            if (!window.fbq) {
-                (function (f, b, e, v, n, t, s) {
-                    if (f.fbq) return;
-                    n = f.fbq = function () {
-                        n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
-                    };
-                    if (!f._fbq) f._fbq = n;
-                    n.push = n;
-                    n.loaded = true;
-                    n.version = "2.0";
-                    n.queue = [];
-                    t = b.createElement(e);
-                    t.async = true;
-                    t.src = v;
-                    s = b.getElementsByTagName(e)[0];
-                    s.parentNode.insertBefore(t, s);
-                })(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
-                if (!window.fbqInitialized) {
-                    window.fbqInitialized = true;
-                }
-            }
+        if (pixelId) {
             try {
-                const utms = getUTMParams();
-                setUtms(utms);
-                saveUtms(utms);
-                window.fbq("track", "PageView", utms);
+                const module = await import("../Webinar/pixel");
+                module.initializeFacebookPixel(pixelId);
+                if (window.fbq) {
+                    window.fbq("track", "PageView", utms);
+                }
             } catch (error) {
-                window.fbq("track", "PageView");
+                // no-op
             }
-            // Clarity
+        }
+
+        if (!window.__kikoClarityLoaded) {
+            window.__kikoClarityLoaded = true;
             (function (c, l, a, r, i, t, y) {
                 c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
                 t = l.createElement(r);
@@ -198,8 +203,50 @@ function TestLandingPage(props) {
                 y.parentNode.insertBefore(t, y);
             })(window, document, "clarity", "script", "sr3m95np08");
         }
-        // eslint-disable-next-line
+    }, [pixelId, saveUtms, utms]);
+
+    useEffect(() => {
+        getSetting();
     }, []);
+
+    useEffect(() => {
+        if (process.env.NODE_ENV === "development") {
+            return undefined;
+        }
+
+        let timeoutId;
+        let idleId;
+        const events = ["pointerdown", "keydown", "touchstart", "scroll"];
+
+        const cleanup = () => {
+            events.forEach((eventName) => {
+                window.removeEventListener(eventName, trigger, true);
+            });
+            if (timeoutId !== undefined) {
+                window.clearTimeout(timeoutId);
+            }
+            if (idleId !== undefined && "cancelIdleCallback" in window) {
+                window.cancelIdleCallback(idleId);
+            }
+        };
+
+        const trigger = () => {
+            initializeTracking();
+            cleanup();
+        };
+
+        events.forEach((eventName) => {
+            window.addEventListener(eventName, trigger, { passive: true, capture: true });
+        });
+
+        if ("requestIdleCallback" in window) {
+            idleId = window.requestIdleCallback(trigger, { timeout: 3000 });
+        } else {
+            timeoutId = window.setTimeout(trigger, 3000);
+        }
+
+        return cleanup;
+    }, [initializeTracking]);
 
     /* ─── form & payment handlers (same as original) ─── */
     const handleChange = (e) => {
@@ -250,12 +297,12 @@ function TestLandingPage(props) {
             if (!userData?.storeName) { notify("error", "Please Enter store name!"); return; }
             const body = {
                 ...userData,
-                webinarDate: get(settingData, "webinarDate", "") || "",
-                isFromLeadWithForm: isFromLeadWithForm ? isFromLeadWithForm : false,
-                utm_source: Utms?.utm_source ?? "",
-                utm_medium: Utms?.utm_medium ?? "",
-                utm_campaign: Utms?.utm_campaign ?? "",
-                utm_content: Utms?.utm_content ?? "",
+                webinarDate: settingData?.webinarDate || "",
+                isFromLeadWithForm: !!isFromLeadWithForm,
+                utm_source: utms.utm_source,
+                utm_medium: utms.utm_medium,
+                utm_campaign: utms.utm_campaign,
+                utm_content: utms.utm_content,
             };
             setDisabled(true);
             const response = await API.post(ADD_WEBINAR_PARTICIPANT, body);
@@ -283,7 +330,7 @@ function TestLandingPage(props) {
     const handleCTA = () => {
         if (isFromLead) {
             window.open(
-                get(settingData, "webinarWhatsappUrl", "") || "https://chat.whatsapp.com/CSt5Uq9KBmj96FmaJYYYfk?mode=ems_copy_t",
+                settingData?.webinarWhatsappUrl || DEFAULT_WHATSAPP_URL,
                 "_blank"
             );
         } else {
@@ -292,7 +339,7 @@ function TestLandingPage(props) {
     };
 
     const ctaLabel = isFromLead || isFromLeadWithForm ? "JOIN WEBINAR WHATSAPP GROUP" : "Register for Webinar";
-    const webinarDate = moment(new Date(get(settingData, "webinarDate", new Date()))).format("MMMM D, YYYY");
+    const webinarDate = formatWebinarDate(settingData?.webinarDate);
 
     /* ─── RENDER ─── */
     return (
@@ -318,14 +365,21 @@ function TestLandingPage(props) {
                             </button>
                         </div>
                         <div className="tl-hero-img">
-                            <img src={FirstSlide} alt="Kirana Shop Online" width={539} height={483} fetchpriority="high" />
+                            <img
+                                src={FirstSlide}
+                                alt="Kirana Shop Online"
+                                width={539}
+                                height={483}
+                                fetchpriority="high"
+                                decoding="async"
+                            />
                         </div>
                     </div>
                 </div>
             </section>
 
             {/* ══════ FEATURES ══════ */}
-            <section className="tl-section">
+            <section className="tl-section tl-deferred-section">
                 <div className="tl-wrap">
                     <h2 className="tl-section-title">What You'll Learn in the Webinar</h2>
                     <p className="tl-section-sub">
@@ -341,7 +395,7 @@ function TestLandingPage(props) {
                         ].map((f, i) => (
                             <div className="tl-feature-card" key={i}>
                                 <div className="tl-feature-icon">
-                                    <img src={f.icon} alt={f.title} />
+                                    <img src={f.icon} alt={f.title} width={26} height={26} loading="lazy" decoding="async" />
                                 </div>
                                 <h3>{f.title}</h3>
                                 <p>{f.desc}</p>
@@ -352,7 +406,7 @@ function TestLandingPage(props) {
             </section>
 
             {/* ══════ COMMUNITY / VIDEOS ══════ */}
-            <section className="tl-section">
+            <section className="tl-section tl-deferred-section">
                 <div className="tl-wrap">
                     <h2 className="tl-section-title">Join a Community of Successful Sellers</h2>
                     <p className="tl-section-sub">
@@ -366,7 +420,14 @@ function TestLandingPage(props) {
                                     key={i}
                                     onClick={() => { setActiveVideoUrl(url); setShowVideo(true); }}
                                 >
-                                    <img src={videoPlaceholder} alt={`Seller success story ${i + 1}`} width={740} height={460} loading="lazy" />
+                                    <img
+                                        src={videoPlaceholder}
+                                        alt={`Seller success story ${i + 1}`}
+                                        width={740}
+                                        height={460}
+                                        loading="lazy"
+                                        decoding="async"
+                                    />
                                     <div className="tl-play-overlay">
                                         <div className="tl-play-btn"><PlayIcon /></div>
                                     </div>
@@ -382,7 +443,7 @@ function TestLandingPage(props) {
                             { icon: partIcon, title: "Be Part of It", quote: "\u201CThanks to ONDC, my business is thriving in the digital age!\u201D" },
                         ].map((q, i) => (
                             <div className="tl-quote-card" key={i}>
-                                <img className="tl-quote-icon" src={q.icon} alt="" />
+                                <img className="tl-quote-icon" src={q.icon} alt="" width={28} height={28} loading="lazy" decoding="async" />
                                 <h4>{q.title}</h4>
                                 <p>{q.quote}</p>
                             </div>
@@ -392,7 +453,7 @@ function TestLandingPage(props) {
             </section>
 
             {/* ══════ AUDIENCE ══════ */}
-            <section className="tl-section">
+            <section className="tl-section tl-deferred-section">
                 <div className="tl-wrap">
                     <h2 className="tl-section-title">Is This Webinar Right for You?</h2>
                     <p className="tl-section-sub">
@@ -406,7 +467,7 @@ function TestLandingPage(props) {
                             { icon: warehouseIcon, title: "Distributors", desc: "Seeking innovative ways to connect with retailers online." },
                         ].map((a, i) => (
                             <div className="tl-audience-card" key={i}>
-                                <img src={a.icon} alt={a.title} loading="lazy" />
+                                <img src={a.icon} alt={a.title} width={40} height={40} loading="lazy" decoding="async" />
                                 <h3>{a.title}</h3>
                                 <p>{a.desc}</p>
                             </div>
@@ -416,7 +477,7 @@ function TestLandingPage(props) {
             </section>
 
             {/* ══════ TESTIMONIALS ══════ */}
-            <section className="tl-section">
+            <section className="tl-section tl-deferred-section">
                 <div className="tl-wrap">
                     <h2 className="tl-section-title">Testimonials</h2>
                     <p className="tl-section-sub">Real feedback from sellers who transformed their businesses.</p>
@@ -443,7 +504,7 @@ function TestLandingPage(props) {
             </section>
 
             {/* ══════ EXPERT ══════ */}
-            <section className="tl-section">
+            <section className="tl-section tl-deferred-section">
                 <div className="tl-wrap">
                     <div className="tl-expert">
                         <div className="tl-expert-inner">
@@ -466,7 +527,7 @@ function TestLandingPage(props) {
                                 </div>
                             </div>
                             <div className="tl-expert-img">
-                                <img src={meetImg} alt="Imran Alam - Expert" width={616} height={577} loading="lazy" />
+                                <img src={meetImg} alt="Imran Alam - Expert" width={616} height={577} loading="lazy" decoding="async" />
                             </div>
                         </div>
                     </div>
@@ -474,19 +535,19 @@ function TestLandingPage(props) {
             </section>
 
             {/* ══════ MEDIA SPOTLIGHT ══════ */}
-            <section className="tl-section">
+            <section className="tl-section tl-deferred-section">
                 <div className="tl-wrap">
                     <h2 className="tl-section-title">Media Spotlight</h2>
                     <p className="tl-section-sub">See what the press is saying about Kiko Live and the kirana revolution.</p>
                     <div className="tl-media-scroll">
                         {articles.map((a, i) => (
                             <div className="tl-media-card" key={i}>
-                                <img src={a.image} alt={a.title} loading="lazy" />
+                                <img src={a.image} alt={a.title} width={270} height={150} loading="lazy" decoding="async" />
                                 <div className="tl-media-body">
                                     <div className="tl-media-meta">
                                         <span className="tl-media-source">{a.source}</span>
                                         <span className="tl-media-date">
-                                            <img src={YellowClockIcon} alt="" style={{ width: 12, height: 12, marginRight: 4 }} />
+                                            <img src={YellowClockIcon} alt="" width={12} height={12} style={{ marginRight: 4 }} />
                                             {a.date}
                                         </span>
                                     </div>
@@ -500,7 +561,7 @@ function TestLandingPage(props) {
             </section>
 
             {/* ══════ CTA STRIP ══════ */}
-            <section className="tl-cta-strip">
+            <section className="tl-cta-strip tl-deferred-section">
                 <div className="tl-wrap">
                     <h2>{isFromLead ? "Thank You For Registration" : "Join Our Exciting Webinar!"}</h2>
                     <p>Unlock the potential of your business by going online. Register now for invaluable insights!</p>
@@ -511,7 +572,7 @@ function TestLandingPage(props) {
             </section>
 
             {/* ══════ FAQ ══════ */}
-            <section className="tl-section">
+            <section className="tl-section tl-deferred-section">
                 <div className="tl-wrap">
                     <h2 className="tl-section-title">FAQs</h2>
                     <p className="tl-section-sub">Find answers to common questions about the Kiko Live Seller webinar.</p>
@@ -554,37 +615,45 @@ function TestLandingPage(props) {
             </div>
 
             {/* ══════ MODALS ══════ */}
-            <Modal isOpen={showRazorpay} onRequestClose={() => setShowRazorpay(false)}>
-                <div className="subscribe-modal-payment">
-                    <PreRazorpay
-                        amount={isWebinarRS9 ? 9 : 49}
-                        onPaymentResponse={handlePaymentResponse}
-                        setOpenPreRazorpayModal={setShowRazorpay}
-                        {...props}
-                    />
-                </div>
-            </Modal>
+            {showRazorpay && (
+                <Modal isOpen={showRazorpay} toggle={() => setShowRazorpay(false)}>
+                    <div className="subscribe-modal-payment">
+                        <Suspense fallback={<div className="tl-modal-loader">Loading payment...</div>}>
+                            <PreRazorpay
+                                amount={isWebinarRS9 ? 9 : 49}
+                                onPaymentResponse={handlePaymentResponse}
+                                setOpenPreRazorpayModal={setShowRazorpay}
+                                {...props}
+                            />
+                        </Suspense>
+                    </div>
+                </Modal>
+            )}
 
             {isOpenModal && (
-                <WebinarModal
-                    handleChange={handleChange}
-                    disabled={disabled}
-                    userData={userData}
-                    onsubmit={onsubmit}
-                    onClose={() => setOpenModal(false)}
-                    isFromLeadWithForm={isFromLeadWithForm}
-                    isWebinarRS9={isWebinarRS9}
-                />
+                <Suspense fallback={<div className="tl-modal-loader">Loading form...</div>}>
+                    <WebinarModal
+                        handleChange={handleChange}
+                        disabled={disabled}
+                        userData={userData}
+                        onsubmit={onsubmit}
+                        onClose={() => setOpenModal(false)}
+                        isFromLeadWithForm={isFromLeadWithForm}
+                        isWebinarRS9={isWebinarRS9}
+                    />
+                </Suspense>
             )}
 
             {isSuccess && (
-                <SuccessModal
-                    whatsAppUrl={get(settingData, "webinarWhatsappUrl", "")}
-                    amount={isWebinarRS9 ? 9 : 49}
-                    onClose={() => { resetUserData(); setIsSuccess(false); }}
-                    pixelId={pixelId}
-                    isFromLeadWithForm={isFromLeadWithForm}
-                />
+                <Suspense fallback={<div className="tl-modal-loader">Loading details...</div>}>
+                    <SuccessModal
+                        whatsAppUrl={settingData?.webinarWhatsappUrl || DEFAULT_WHATSAPP_URL}
+                        amount={isWebinarRS9 ? 9 : 49}
+                        onClose={() => { resetUserData(); setIsSuccess(false); }}
+                        pixelId={pixelId}
+                        isFromLeadWithForm={isFromLeadWithForm}
+                    />
+                </Suspense>
             )}
 
             {/* ══════ VIDEO MODAL ══════ */}

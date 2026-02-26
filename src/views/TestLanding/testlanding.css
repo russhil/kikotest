@@ -1,8 +1,5 @@
 /* ===== TestLanding — A/B Webinar Page v2 ===== */
 
-/* ── Google Font hint (loaded in component) ── */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-
 :root {
     --tl-bg: #0a0e1a;
     --tl-surface: rgba(255, 255, 255, 0.04);
@@ -32,7 +29,7 @@
 .tl-page {
     background: var(--tl-bg);
     color: var(--tl-text);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
@@ -220,6 +217,11 @@
 .tl-section {
     padding: 56px 0;
     position: relative;
+}
+
+.tl-deferred-section {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 920px;
 }
 
 .tl-section-title {
@@ -925,6 +927,13 @@
 
 .tl-video-close:hover {
     background: rgba(255, 255, 255, 0.2);
+}
+
+.tl-modal-loader {
+    color: var(--tl-text);
+    text-align: center;
+    font-size: 14px;
+    padding: 20px;
 }
 
 /* ══════════════════════════════════════
