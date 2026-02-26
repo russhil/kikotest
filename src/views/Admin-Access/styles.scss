@@ -1,0 +1,80 @@
+.admin-access-header{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin: 22px 0px;
+  padding: 0 25px;
+  gap: 12px;
+}
+.admin-acces-container{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  flex-wrap: wrap;
+
+}
+.admin-acces-filter-label{
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 25px;
+  color: #1A1A1A;
+  margin-right: 8px;
+  margin-bottom: 0;
+  white-space: nowrap;
+}
+.admin-acces-filter-items{
+  display: flex;
+  align-items: center; 
+}
+.admin-acces-block {
+  .Admin-acces-filter {
+    padding: 15px 30px;
+
+    .filter {
+      span {
+        display: inline-block;
+        margin-right: 10px;
+        margin-bottom: 8px;
+
+        @media screen and (max-width: 767px) {
+          width: 100%;
+        }
+      }
+
+      label {
+        margin-right: 10px;
+      }
+
+      .react-datepicker-wrapper,
+      input {
+        @media screen and (max-width: 767px) {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .seller-list-heading {
+    padding: 8px 30px;
+    background: #c4b7dd;
+
+    p {
+      margin: 0;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      color: #000;
+    }
+  }
+
+  .Admin-acces-table {
+    padding: 20px 30px;
+
+    thead {
+      td {
+        background: #f3f3f3;
+      }
+    }
+  }
+}

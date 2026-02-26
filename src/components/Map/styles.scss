@@ -1,0 +1,42 @@
+.markerbg {
+  position: fixed;
+  left: 50%;
+  top: 43.5%;
+  transform: translate(-50%, -250%);
+  background: #000;
+  border-radius: 4px;
+  z-index: 99;
+  padding: 7px 10px;
+  text-align: center;
+  width: 230px;
+}
+
+.markerbg::after {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 16px solid #000;
+  position: absolute;
+  top: 98%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.markerbg h4 {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
+  margin: 0 0 2px 0;
+  color: #fff;
+}
+
+.markerbg p {
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 16px;
+  margin: 0;
+  padding: 0;
+  color: #ccc;
+}

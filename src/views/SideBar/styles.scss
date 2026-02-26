@@ -1,0 +1,253 @@
+
+
+.dashboardWrapper {
+  .sideBar {
+    background: var(--mainColor);
+    width: 251px;
+    height: 100vh;
+    transition: all 0.3s ease-in-out;
+    -webkit-transform: translateX(0);
+    display: inline-block;
+    transform: translateX(0) !important;
+    position: fixed;
+    z-index: 2;
+    @media screen and (max-width: 992px) {
+      transform: translateX(-100%) !important;
+    }
+
+    &.showmenu {
+      @media screen and (max-width: 992px) {
+        transition: all 0.3s ease-in-out;
+        // transform: translateX(-100%) !important;
+        transform: translateX(0) !important;
+      }
+    }
+
+    .sidebarList {
+      height: 100%;
+
+      ul {
+        padding: 0;
+        list-style: none;
+
+        li.active {
+          background: var(--activeColor);
+
+          a {
+            color: #fff;
+          }
+        }
+
+        li {
+          padding: 11px 18px;
+
+          a {
+            font-weight: 500;
+            font-size: 16px;
+            color: #ebf1fd;
+            text-decoration: none;
+            display: block;
+          }
+
+          img {
+            max-width: 20px;
+            margin-right: 8px;
+          }
+        }
+      }
+    }
+
+    .bottomtext {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      left: 0;
+    }
+
+    .footersection {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding:4px 20px 13px 20px;
+      border-top: 1px solid #c0c0c7;
+
+      img {
+        max-width: 150px;
+        margin: 0 auto;
+      }
+
+      p {
+        font-family: "Nunito";
+        font-weight: 500;
+        font-size: 16px;
+        color: #fdfdfd;
+      }
+    }
+  }
+
+  .RightBlock {
+    width: calc(100% - 251px);
+    position: absolute;
+    left: 251px;
+    display: inline-block;
+    // overflow-y: auto;
+    // height: 100vh;
+
+    @media screen and (max-width: 992px) {
+      width: 100%;
+      left: 0;
+      top: 68px;
+    }
+  }
+}
+
+.headersection {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 10px 13px 9px;
+  border-bottom: 1px solid #c0c0c7;
+
+  .profile-img {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    background: #300787;
+    border-radius: 50%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    p {
+      font-size: 28px;
+      color: #fff;
+      margin: 0;
+      font-weight: 600;
+    }
+  }
+
+ 
+
+  h6 {
+    font-weight: 500;
+    font-size: 18px;
+    color: #fbfbfb;
+    margin: 0;
+  }
+
+  .user-text {
+    color: #000;
+  }
+}
+
+.mobileviewHeader {
+  display: none;
+
+  @media screen and (max-width: 992px) {
+    display: block;
+    padding: 10px 20px;
+    position: fixed;
+    width: 100%;
+    background: white;
+    z-index: 1;
+  }
+
+  .hamburgerIcon {
+    max-width: 20px;
+  }
+}
+
+.switchBtn {
+  display: flex;
+  padding: 11px 18px;
+  align-items: center;
+
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 53px;
+    height: 25px;
+  }
+
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+  }
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 25px;
+    width: 25px;
+    left: 0px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+    top: 0px;
+  }
+
+  input:checked + .slider {
+    background-color: #10c60d;
+  }
+
+  input:focus + .slider {
+    box-shadow: 0 0 1px #10c60d;
+  }
+
+  input:checked + .slider:before {
+    transform: translateX(23px);
+    -ms-transform: translateX(23px);
+    transform: translateX(23px);
+    left: 6px;
+  }
+
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+
+  .slider.round:before {
+    border-radius: 50%;
+  }
+
+  p {
+    color: #fff;
+    font-size: 18px;
+    margin: 0 10px 0 0;
+    font-weight: 500;
+  }
+}
+
+.bodywrapper {
+  @media screen and (max-width: 992px) {
+    position: absolute;
+    z-index: 1;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    top: 68px;
+  }
+}
+.logout-icon {
+  background: none;
+  border: none;
+  padding: 0;
+
+  img {
+    max-width: 24px;
+  }
+}

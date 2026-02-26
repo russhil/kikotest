@@ -1,0 +1,160 @@
+.InputFlex {
+  display: block;
+  margin-top: 30px;
+
+  .inputflexBlock {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 370px;
+    width: 100%;
+    margin: 0 auto;
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        margin: 0; 
+    }
+    
+    input {
+      width: 40px !important;
+      height: 43px;
+      background: #fff;
+      border: 1px solid #dcdcdc;
+      border-radius: 4px;
+      margin: 0 7px;
+      font-family: "Nunito", sans-serif;
+      font-size: 25px;
+      font-weight: 500;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  .OptDigits {
+    width: 52px;
+    height: 52px;
+    background: #ffffff;
+    border: 1px solid #dcdcdc;
+    border-radius: 10px;
+    padding: 0 10px;
+    text-align: center;
+    letter-spacing: 0px;
+    color: #000000;
+    font-family: "Nunito", sans-serif;
+    font-size: 34px;
+    font-weight: 700;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+.ondc-otp-block {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  h1 {
+    font-size: 50px;
+    font-weight: 600;
+    color: #000;
+    margin: 0 0 20px 0;
+    @media screen and (max-width: 767px) {
+      font-size: 40px;
+    }
+}
+  p {
+    font-size: 25px;
+    color: #000;
+    font-weight: 500;
+    margin-bottom: 40px;
+  }
+  .checkboxBlock {
+    display: flex;
+    align-items: start;
+    position: relative;
+    margin-top: 15px;
+    text-align: left;
+    max-width: 525px;
+    margin: 22px auto 0;
+    label {
+ 
+      transition: 0.5s all;
+      margin: 0;
+      padding: 0;
+      font-size: 16px;
+      font-weight: 500;
+      text-transform: uppercase;
+      cursor: pointer;
+      background-position: left top;
+      background-size: auto 100%;
+      background-repeat: no-repeat;
+      padding-left: 37px;
+      background-image: url("data:image/svg+xml,%3C?xml version='1.0' encoding='iso-8859-1'?%3E %3C!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.1//EN' 'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'%3E %3Csvg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='533.333px' height='533.333px' viewBox='0 0 533.333 533.333' style='enable-background:new 0 0 533.333 533.333;' xml:space='preserve'%3E %3Cg%3E %3Cpath d='M0,0v533.333h533.333V0H0z M500,500H33.333V33.333H500V500z'/%3E %3C/g%3E %3C/svg%3E ");
+      background-position-y: 6px;
+      background-size: 18px;
+    }
+    input[type="checkbox"] {
+      opacity: 0;
+      position: absolute;
+      z-index: 2;
+      display: block;
+      left: 0;
+      top: 0;
+      height: 18px;
+      width: 18px;
+      cursor: pointer;
+    }
+    input[type="checkbox"]:checked + label {
+      background-image: url("data:image/svg+xml,%3C?xml version='1.0' encoding='iso-8859-1'?%3E %3C!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.1//EN' 'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'%3E %3Csvg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='533.333px' height='533.333px' viewBox='0 0 533.333 533.333' style='enable-background:new 0 0 533.333 533.333;' xml:space='preserve'%3E %3Cg%3E %3Cpath d='M0,0v533.333h533.333V0H0z M500,500H33.333V33.333H500V500z M400,116.667L233.333,283.333l-100-100L66.667,250 l166.667,166.667l233.333-233.333L400,116.667z'/%3E %3C/g%3E %3C/svg%3E ");
+    }
+  }
+  .terms-condition {
+    a {
+      color: #000;
+    }
+  }
+}
+.ondc-otp-container {
+  background: #f4f6fb;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.ondc-otp-block .RecievedOtp {
+  font-size: 16px;
+  font-weight: 400;
+  color: #000;
+  text-align: end;
+  margin-bottom: 0;
+  margin-top: 7px;
+}
+.ondc-proceed-btn {
+  margin-top: 50px;
+  .btn {
+    min-height: 45px;
+    border-radius: 12px;
+  }
+}
+.brand-logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -90px;
+}
+.otp-section  {
+    padding: 0 20px ;
+    box-sizing: border-box;
+    position: relative;
+}
+.otp-section img {
+  max-width: 400px;
+  vertical-align: sub;
+  @media screen and (max-width:767px) {
+    max-width: 300px;
+}
+}

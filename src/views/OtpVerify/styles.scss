@@ -1,0 +1,328 @@
+.registrationWrapper {
+  height: 100vh;
+
+  // @media screen and (max-width: 992px) {
+  //   height: 100%;
+  // }
+
+  .registrationBlock {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media screen and (max-width: 992px) {
+      text-align: center;
+    }
+    .right-section {
+      background: #fbf9ff;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 0 46px;
+      @media screen and (max-width: 1200px) {
+        padding: 0 20px;
+      }
+      @media screen and (max-width: 992px) {
+        display: none;
+      }
+    }
+    .brandlogo {
+      max-width: 100px;
+      width: 100%;
+      margin-bottom: 11px;
+      padding-top: 80px;
+
+      @media screen and (max-width: 992px) {
+        margin: 0 auto 11px;
+        padding: 0;
+      }
+
+      img {
+        max-width: 100%;
+        object-fit: contain;
+      }
+    }
+
+    .passwordStrong {
+      @media screen and (max-width: 992px) {
+        text-align: left;
+      }
+
+      p {
+        font-weight: 600;
+        color: #000000;
+      }
+
+      ul {
+        list-style-type: none;
+        padding-left: 10px;
+        margin-bottom: 25px;
+
+        li {
+          position: relative;
+          padding-left: 30px;
+          font-weight: 500;
+          font-size: 14px;
+          color: #72727a;
+          line-height: 25px;
+
+          &::before {
+            content: "";
+            height: 12px;
+            width: 12px;
+            color: rgb(255, 255, 255);
+            text-align: center;
+            position: absolute;
+            left: 0;
+            top: 5px;
+            background: #d9d9d9;
+            border-radius: 50%;
+          }
+
+          &::marker {
+            font-size: 43px;
+            color: #d9d9d9;
+            line-height: 15px;
+          }
+        }
+      }
+    }
+
+    form {
+      margin-top: 40px;
+
+      .otpsendText {
+        font-weight: 600;
+        font-size: 15px;
+        color: #5b5b5b;
+        display: flex;
+        align-items: center;
+        height: 100%;
+      }
+
+      .resend-otp {
+        text-align: right;
+        font-weight: 600;
+        font-size: 15px;
+        color: #000000;
+        margin:  0;
+      }
+
+      .form-control {
+        border: 1px solid #a1a1ac;
+        border-radius: 4px;
+        padding: 11px 40px 11px 16px;
+
+        @media screen and (max-width: 767px) {
+          padding-right: 24px;
+        }
+
+        .eyeiconinput {
+          padding: 14px 0;
+          width: 100%;
+          border: none;
+
+          &:focus {
+            outline: none;
+            border: none;
+          }
+        }
+
+        &:focus {
+          box-shadow: none;
+          outline: none;
+        }
+
+        .eyeIcon {
+          display: flex;
+          align-items: center;
+
+          img {
+            max-width: 25px;
+            margin-right: 8px;
+          }
+        }
+
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus,
+        input:-webkit-autofill:active {
+          transition: background-color 5000s ease-in-out 0s;
+        }
+      }
+
+      .btn {
+        border-radius: 4px;
+        padding: 11px 16px;
+        width: 100%;
+        white-space: nowrap;
+        margin: 0;
+        @media screen and (max-width: 767px) {
+          font-size: 15px;
+          padding: 7px 5px;
+        }
+      }
+    }
+
+    .btn {
+      max-width: 100%;
+      padding: 11px;
+      width: 100%;
+      @media screen and (max-width: 992px) {
+        max-width: 300px;
+      }
+    }
+    .checkboxBlock {
+      display: flex;
+      align-items: start;
+      position: relative;
+      margin-top: 15px;
+      label {
+        transition: 0.5s all;
+        margin: 0;
+        padding: 0;
+        font-size: 16px;
+        text-transform: uppercase;
+        cursor: pointer;
+        background-position: left center;
+        background-size: auto 100%;
+        background-repeat: no-repeat;
+        padding-left: 37px;
+        background-image: url("data:image/svg+xml,%3C?xml version='1.0' encoding='iso-8859-1'?%3E %3C!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.1//EN' 'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'%3E %3Csvg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='533.333px' height='533.333px' viewBox='0 0 533.333 533.333' style='enable-background:new 0 0 533.333 533.333;' xml:space='preserve'%3E %3Cg%3E %3Cpath d='M0,0v533.333h533.333V0H0z M500,500H33.333V33.333H500V500z'/%3E %3C/g%3E %3C/svg%3E ");
+        background-size: 18px;
+      }
+      input[type="checkbox"] {
+        opacity: 0;
+        position: absolute;
+        z-index: 2;
+        display: block;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 20%;
+        cursor: pointer;
+      }
+      input[type="checkbox"]:checked + label {
+        background-image: url("data:image/svg+xml,%3C?xml version='1.0' encoding='iso-8859-1'?%3E %3C!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.1//EN' 'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'%3E %3Csvg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='533.333px' height='533.333px' viewBox='0 0 533.333 533.333' style='enable-background:new 0 0 533.333 533.333;' xml:space='preserve'%3E %3Cg%3E %3Cpath d='M0,0v533.333h533.333V0H0z M500,500H33.333V33.333H500V500z M400,116.667L233.333,283.333l-100-100L66.667,250 l166.667,166.667l233.333-233.333L400,116.667z'/%3E %3C/g%3E %3C/svg%3E ");
+      }
+    }
+
+    .terms-condition {
+      font-weight: 600;
+      font-size: 15px;
+      color: #000000;
+      cursor: pointer;
+
+      @media screen and (max-width: 992px) {
+        text-align: center;
+      }
+      .termsCondition {
+        color: #59399f;
+      }
+    }
+
+    .loginText {
+      display: flex;
+      align-items: center;
+      justify-content: end;
+      margin-bottom: 50px;
+
+      @media screen and (max-width: 992px) {
+        justify-content: center;
+        margin-bottom: 25px;
+        margin-top: 30px;
+      }
+
+      .loginBtn {
+        border: 1px solid #300787;
+        border-radius: 4px;
+        margin-left: 15px;
+        color: #59399f;
+        padding: 3px 17px;
+        text-decoration: none;
+      }
+    }
+
+    .growBusiness {
+      margin-top: 30px;
+
+      .col-md-6 {
+        border-bottom: 1px solid #d4d4d9;
+        padding: 33px 50px;
+        border-right: 1px solid #d4d4d9;
+        @media screen and (max-width: 1200px) {
+          padding: 33px 35px;
+        }
+        @media screen and (max-width: 767px) {
+          border: none;
+          padding: 10px 50px;
+        }
+
+        &:nth-child(2) {
+          border-right: none;
+        }
+
+        &:nth-child(3) {
+          border-bottom: none;
+          border-right: 1px solid #d4d4d9;
+        }
+
+        &:last-child {
+          border: none;
+        }
+
+        .cardDetails {
+          text-align: center;
+
+          img {
+            max-width: 100px;
+            margin-bottom: 12px;
+          }
+
+          .card-text {
+            border: 1px solid #d4d4d9;
+            border-radius: 8px;
+            padding: 10px 20px;
+
+            p {
+              font-size: 16px;
+              margin: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.InputFlex {
+  display: flex;
+  margin-top: 30px;
+  .inputflexBlock {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    input {
+      width: 45px !important;
+      height: 50px;
+      border: 0.8000000119px solid #cdcdcd;
+      border-radius: 6px;
+      margin: 0 4px;
+      font-size: 24px;
+      font-weight: 300;
+      background: #f7f7f7;
+      &:focus-visible {
+        outline: none;
+      }
+    }
+  }
+}

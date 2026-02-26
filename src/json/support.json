@@ -1,0 +1,106 @@
+{
+    "ENG": [
+        {
+            "title": "How to login on your app/web application ?",
+            "subTitle": "To login on your app/web application, follow these steps :",
+            "value": "<ul><li>Open KIKO website. Fill in your phone number.</li><li>Enter the OTP received and click on proceed.</li></ul></li></ul>"
+        },
+        {
+            "title": "How to list your products ?",
+            "subTitle": "To list your products, follow these steps :",
+            "value": "<ul><li>Click 'Add New Products' on the left panel.</li><li> Choose 'Add Single Catalog' for a new product. Specify product category and subcategory.</li><li>Upload Images. Add 1-9 images, as per the guidelines. Click 'Save and Proceed' to move forward.</li><li>Enter quantity, pricing, and other info. Use AI for an engaging product description. Finalize by clicking 'Submit Catalogue'. </li><li>You can verify your product status in 'Inventory.'</li></ul>"
+        },
+        {
+            "title": " How to update inventory?",
+            "subTitle": "",
+            "value": "<ul><li>Click 'Inventory’' on the left side panel.</li><li> Choose 'Pencil Icon'  to edit or update your inventory           </li>Now follow the same step as mentioned in how to list your products</ul>"
+        },
+        {
+            "title": "How to change pricing ?",
+            "subTitle": "",
+            "value": "<ul><li>Click 'Inventory’' on the left side panel.</li><li> Choose 'Pencil Icon'  to edit or update your inventory            </li> Now follow the same step as mentioned in how to list your products</ul>"
+        },
+        {
+            "title": " How to accept orders ?",
+            "subTitle": "To accept orders, follow these steps :",
+            "value": "<ul><li>Click 'ONDC Orders' on the left panel.</li><li> Click 'View Order' for customer info, product name, and amount. </li><li> Click 'Accept' and for example choose self delivery. Confirm Self Delivery. Select 'Yes' for self-delivery. </li><li> Update Delivery Status. Add an image for delivery proof </li></ul>"
+        },
+        {
+            "title": " How to mark an item out of stock ?",
+            "subTitle": "",
+            "value": "<ul><li>Click on 'Inventory' in the left panel.</li><li> Click the toggle button to mark the product status as out of stock.</li></ul>"
+        },
+        {
+            "title": "How to update online ordering operation timings ?",
+            "subTitle": "",
+            "value": "<ul><li>Click on 'Profile' in the left panel.</li><li> Choose 'Store Timings' to edit or update your store operation timings.</li></ul>"
+        },
+        {
+            "title": "How to switch off online ordering temporarily ?",
+            "subTitle": "To temporarily switch off online ordering, go to the left side panel, scroll to the bottom, and click on the toggle button.",
+            "value": ""
+        },
+        {
+            "title": "How to raise a support ticket on merchant support ?",
+            "subTitle": "To raise a support ticket on merchant support. Navigate to FAQ & Support.",
+            "value": ""
+        },
+        {
+            "title": "How to check payouts information ?",
+            "subTitle": "To check payouts information, go to the seller panel, and click on 'ONDC Settlement' in the left panel.",
+            "value": ""
+        }
+    ],
+    "HND": [
+        {
+            "title": " Apne app ya web application mein login kaise karein ?",
+            "subTitle": "Apne app ya web application mein login karne ke liye, in steps ko follow karein :",
+            "value": "<ul><li>KIKO website kholen. Apna phone number bharein.</li><li>OTP daalen jo aapko mila hai, aur proceed par click karein.</li></ul></li></ul>"
+        },
+        {
+            "title": " Apne products ko list kaise karein ?",
+            "subTitle": "Apne products ko list karne ke liye, ye steps follow karein : ",
+            "value": "<ul><li>left panel mein 'Add New Products' pe click karein.</li><li>Naye product ke liye 'Add Single Catalog' choose karein. Category aur Subcategory specify karein.</li><li>1-9 images add karein, diye gaye guidelines ke anusar. 'Save and Proceed' pe click karein, aage badhne ke liye.</li><li>Quantity, pricing, aur aur information bharein. Product description ke liye AI ka istemal karein. 'Submit Catalogue' pe click karein.</li><li>Apne product ka status 'Inventory' mein verify kar sakte hai.</li></ul>"
+        },
+        {
+            "title": "  Inventory ko update kaise karein ?",
+            "subTitle": "",
+            "value": "<ul><li>left panel mein 'Inventory' pe click karo.</li><li> Apne inventory ko edit ya update karne ke liye 'Pencil Icon' pe click karo </li>Ab, product add karne wale steps ko follow karo, jaise - link - yaha bataya gaya hai </ul>"
+        },
+        {
+            "title": "Pricing kaise change karein ?",
+            "subTitle": "",
+            "value": "<ul><li>Step 1: left panel mein 'Inventory' pe click karo.</li><li> Step 2: Apne inventory ko edit ya update karne ke liye 'Pencil Icon' pe click karo.</li>Ab, product add karne wale steps ko follow karo, jaise - link - yaha bataya gaya hai</ul>"
+        },
+        {
+            "title": "Order kaise accept karein ?",
+            "subTitle": "Orders accept karne ke liye, in steps ko follow karein :",
+            "value": "<ul><li>left panel mein 'ONDC Orders' pe click karein.</li><li>Customer info, product name, aur amount ke liye 'View Order' pe click karein.</li><li> 'Accept' pe click karein aur for example, self delivery ko choose karein. Self delivery confirm karein  'Yes' button pe click karein</li><li> Delivery proof ke liye ek image add karein. </li></ul>"
+        },
+        {
+            "title": "Saman ko out of stock kaise karein ?",
+            "subTitle": "",
+            "value": "<ul><li>left panel mein 'Inventory' pe click karo.</li><li>Toggle button pe click karo, taki product status out of stock ho.</li></ul>"
+        },
+        {
+            "title": "Online order karne ke operation timings ko update kaise karein ?",
+            "subTitle": "",
+            "value": "<ul><li>Left side panel mein jaake 'Profile' pe click karo.</li><li>'Store Timings' choose karo apne store operation timings ko edit ya update karne ke liye.</li></ul>"
+        },
+        {
+            "title": "Online ordering ko temporarily band kaise karein ?",
+            "subTitle": "Online ordering ko temporary band karne ke liye, left side panel mein jao, neeche scroll karo, aur toggle button pe click karo.",
+            "value": ""
+        },
+        {
+            "title": "Merchant support par ek support ticket kaise raise karein ?",
+            "subTitle": "To raise a support ticket on merchant support. Navigate to FAQ & Support",
+            "value": ""
+        },
+        {
+            "title": "Payouts ki jaankari kaise check karein ?",
+            "subTitle": "Payouts ki jaankari dekhne ke liye, seller panel mein jaao, aur left panel mein 'ONDC Settlement' pe click karo",
+            "value": ""
+        }
+    ]
+}

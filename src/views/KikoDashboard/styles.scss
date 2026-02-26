@@ -1,0 +1,290 @@
+.KikoDashboardWrapper {
+  .RightBlock {
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      @media screen and (max-width: 992px) {
+        flex-wrap: wrap;
+      }
+      @media screen and (max-width: 450px) {
+        gap: 10px;
+      }
+      h1 {
+        @media screen and (max-width: 992px) {
+          margin-bottom: 5px;
+        }
+      }
+
+      // .titleRight {
+      //   display: flex;
+      //   align-items: center;
+      //   gap: 15px;
+      //   width: 60%;
+
+      //   @media screen and (max-width: 992px) {
+      //     width: 100%;
+      //   }
+
+      //   .dashboardBtn {
+      //     position: relative;
+      //     max-width: 155px;
+      //     width: 100%;
+
+      //     &::before {
+      //       position: absolute;
+      //       content: "";
+      //       background: url(../../images//Dashboard/excel.svg) no-repeat;
+      //       width: 22px;
+      //       height: 22px;
+      //       background-position: center left;
+      //       left: 11px;
+      //       background-size: 22px;
+      //     }
+
+      //     &::after {
+      //       position: absolute;
+      //       content: "";
+      //       background: url(../../images//Dashboard/white-down-arrow.svg)
+      //         no-repeat;
+      //       width: 15px;
+      //       height: 15px;
+      //       background-position: bottom;
+      //       background-size: contain;
+      //       right: 12px;
+      //     }
+      //   }
+
+      //   .searchorder {
+      //     display: flex;
+      //     align-items: center;
+      //     border: 1px solid #d4d4d9;
+      //     border-radius: 4px 0px 0px 4px;
+      //     width: 100%;
+
+      //     button {
+      //       background: none;
+      //       border: none;
+      //       width: 50%;
+      //       padding: 12px 10px;
+
+      //       @media screen and (max-width: 992px) {
+      //         width: 40%;
+      //       }
+
+      //       img {
+      //         float: right;
+      //         max-width: 20px;
+      //       }
+      //     }
+
+      //     .searchinput {
+      //       position: relative;
+
+      //       &::after {
+      //         content: "";
+      //         position: absolute;
+      //         background: url(../../images/Dashboard/downArrow.svg) no-repeat;
+      //         width: 17px;
+      //         height: 17px;
+      //         background-position: center;
+      //         background-size: contain;
+      //         right: 12px;
+      //         top: 50%;
+      //         transform: translatey(-50%);
+      //       }
+
+      //       input {
+      //         border-right: 1px solid #d4d4d9;
+      //         border-top: 0;
+      //         border-bottom: 0;
+      //         border-left: 0;
+      //         width: 50%;
+      //         padding: 8px 10px;
+      //         width: 100%;
+
+      //         &:focus {
+      //           outline: none;
+      //           border-right: 1px solid #d4d4d9;
+      //           border-top: 0;
+      //           border-bottom: 0;
+      //           border-left: 0;
+      //         }
+      //       }
+      //     }
+      //   }
+      // }
+    }
+
+    .detailsBlock {
+      padding: 0 14px;
+
+      .dashboardCard {
+        border: 1px solid #e2e2e5;
+        border-radius: 4px;
+        padding: 16px;
+
+        @media screen and (max-width: 992px) {
+          margin-bottom: 15px;
+        }
+
+        p {
+          font-weight: 500;
+          font-size: 16px;
+          color: #59595f;
+          margin-bottom: 8px;
+        }
+
+        h1 {
+          font-weight: 600;
+          font-size: 26px;
+          color: #27272b;
+        }
+
+        .cardFooter {
+          border-top: 1px solid #b4b4bd;
+          margin-top: 24px;
+          padding: 7px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          p {
+            font-weight: 500;
+            font-size: 16px;
+            color: #59595f;
+            margin: 0;
+
+            span {
+              font-weight: 500;
+              font-size: 20px;
+              color: #27272b;
+            }
+          }
+        }
+      }
+    }
+
+    .sellingProductsWrapper {
+      padding: 0 15px;
+      margin: 37px 0 14px;
+    }
+
+    .performanceBlock {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+
+      @media screen and (max-width: 992px) {
+        margin-bottom: 15px;
+      }
+
+      h1 {
+        font-weight: 600;
+        font-size: 26px;
+        color: #27272b;
+      }
+
+      h6 {
+        font-weight: 500;
+        font-size: 16px;
+        color: #000;
+      }
+
+      span {
+        font-weight: 400;
+        font-size: 12px;
+        color: #59595f;
+        position: relative;
+        padding-left: 25px;
+
+        &::before {
+          content: "";
+          position: absolute;
+          background: #a4befa;
+          width: 16px;
+          height: 16px;
+          border-radius: 2px;
+          top: 0;
+          left: 0;
+        }
+      }
+
+      .right-section {
+        display: flex;
+        gap: 10px;
+
+        select {
+          border: 1px solid #e2e2e5;
+          border-radius: 8px;
+          padding: 5px 8px;
+        }
+      }
+
+      .table-section {
+        width: 100%;
+
+        .table-responsive {
+          padding: 0 20px;
+          border: 1px solid #e2e2e5;
+          border-radius: 4px;
+
+          table {
+            margin: 0;
+
+            thead {
+              tr,
+              th {
+                border: none;
+              }
+            }
+
+            tbody {
+              tr {
+                &:last-child {
+                  border: none;
+                }
+
+                td,
+                th {
+                  border: none;
+                  padding: 13px 7px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .footerWrapper {
+      padding: 0 15px;
+
+      .left-section {
+        border: 1px solid #e2e2e5;
+        border-radius: 4px;
+        padding: 8px;
+        @media screen and (max-width: 992px) {
+          margin-bottom: 15px;
+        }
+        h6 {
+          span {
+            font-weight: 600;
+            font-size: 18px;
+            color: #27272b;
+          }
+        }
+
+        a {
+          color: #000000;
+        }
+      }
+
+      .right-section {
+        padding: 23px 16px;
+        border: 1px solid #e2e2e5;
+        border-radius: 4px;
+      }
+    }
+  }
+}

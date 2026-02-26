@@ -1,0 +1,51 @@
+.sso-login-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  height: 100vh;
+  h1 {
+    font-size: 30px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 42px;
+    @media screen and (max-width: 767px) {
+      font-size: 24px;
+      margin-bottom: 18px;
+    }
+  }
+  h4 {
+    font-size: 21px;
+    font-weight: 500;
+    color: #000;
+    margin-bottom: 62px;
+    @media screen and (max-width: 767px) {
+      font-size: 18px;
+      margin-bottom: 52px;
+    }
+    a {
+      color: #000;
+      text-decoration: none;
+      font-weight: 600;
+    }
+  }
+}
+.sso-login-text {
+  max-width: 600px;
+  @media screen and (max-width: 767px) {
+    max-width: 300px;
+  }
+}
+.sso-container {
+  position: relative;
+}
+.sso-kiko-logo {
+  position: absolute;
+  bottom: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  @media screen and (max-width: 767px) {
+    bottom: 120px;
+  }
+}

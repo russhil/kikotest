@@ -1,0 +1,22 @@
+.footer-webinar-container {
+  background-color: #fff;
+  border-top: 1px solid #f6f6f6;
+  .menu-footer-container .menu {
+    column-count: 1;
+  }
+  .footer-widget-area {
+    padding: 0;
+  }
+  .menu-footer-container .menu .menu-item{
+    padding: 0px;
+    margin-bottom: 1rem;
+  } 
+  .widget.widget_text .kiko-logo img{
+    margin-bottom: 0px;
+  }
+  .menu-footer-container .menu .menu-link,
+  .footer-widget-area .textwidget p, p > a{
+    color: #000 !important;
+  }
+ 
+}

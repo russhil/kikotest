@@ -1,0 +1,110 @@
+.loan-ui-wrapper { 
+  padding: 0px 16px;
+  text-align: center;
+  height: calc(100dvh - 210px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.loan-container{
+  padding: 0px 16px 16px;
+}
+.loan-ui-title {
+  font-size: 36px;
+  font-weight: 700;
+  color: #7c5cc4;
+  line-height: 1.2;
+}
+
+.loan-ui-subtitle {
+  margin-top: 12px;
+  font-size: 15px;
+  color: #000;
+}
+
+.loan-ui-card {
+  width: 100%;
+  max-width: 808px;
+  margin-top: 20px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.loan-ui-card-top {
+  background: #7c5cc4;
+  color: #ffffff;
+  padding: 32px 20px;
+}
+
+.loan-ui-eligibility {
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 100%;
+  text-align: center;
+  letter-spacing: 0.02em;
+  color: #FAFAFA;
+}
+
+.loan-ui-amount {
+  font-size: 54px;
+  font-weight: 700;
+  margin: 12px 0;
+  color: #fff;
+}
+
+.loan-ui-interest-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+}
+
+.loan-ui-card-bottom {
+  background: #ffffff;
+  padding: 24px 20px 10px 20px;
+}
+
+.loan-ui-cta-btn {
+  width: 100%;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  background: #7c5cc4;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  padding: 10px;
+}
+
+.loan-ui-cta-btn:hover {
+  background: #6a4bb0;
+}
+
+.loan-ui-note {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #9ca3af;
+}
+.loan-footer{
+  // padding: 0px 30px 20px;
+  .contact-us-headline{
+    position: initial;
+    padding-right: 0px !important;
+    text-align: right;
+  }
+}
+/* Responsive */
+@media (max-width: 480px) {
+  .loan-ui-title {
+    font-size: 28px;
+  }
+
+  .loan-ui-amount {
+    font-size: 34px;
+  }
+}
